@@ -1,0 +1,73 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>4</storyId>
+    <title>Document Search</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/2-4-document-search.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a user</asA>
+    <iWant>to search for my documents</iWant>
+    <soThat>I can quickly find the information I need.</soThat>
+    <tasks>
+- [ ] Implement `DocumentSearchComponent` on the frontend.
+- [ ] Implement backend API endpoint `GET /api/v1/documents/search?q={query}` to search for documents.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1. Given a logged-in user has multiple documents, when the user enters a search query, then the user should see a list of documents that match the query in their title or content.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>law-ai - Epic Breakdown</title>
+        <section>Story 2.4: Document Search</section>
+        <snippet>As a user, I want to search for my documents, so that I can quickly find the information I need.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Document Upload & Management</title>
+        <section>APIs and Interfaces</section>
+        <snippet>GET /api/v1/documents/search?q={query}: Searches for documents.</snippet>
+      </doc>
+    </docs>
+    <code></code>
+    <dependencies>
+      <frontend>
+        <dependency>firebase: ^12.5.0</dependency>
+        <dependency>next: 16.0.1</dependency>
+        <dependency>react: 19.2.0</dependency>
+      </frontend>
+      <backend>
+        <dependency>fastapi: 0.121.0</dependency>
+        <dependency>firebase-admin: 7.1.0</dependency>
+      </backend>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use a search-as-you-type experience for better usability.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>GET /api/v1/documents/search</name>
+      <kind>REST endpoint</kind>
+      <signature>Query Parameter: q={query}, Response (200 OK): [ { "id": "...", "title": "...", "createdAt": "..." }, ... ]</signature>
+      <path>backend/app/main.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>E2E tests will cover the document search flow.</standards>
+    <locations>frontend/__tests__, backend/tests</locations>
+    <ideas>
+      <idea for="AC1">Verify that searching for a document by title or content returns the correct results.</idea>
+    </ideas>
+  </tests>
+</story-context>

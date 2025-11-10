@@ -1,0 +1,91 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>1</storyId>
+    <title>PDF Document Upload</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/2-1-pdf-document-upload.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a user</asA>
+    <iWant>to upload a PDF document</iWant>
+    <soThat>I can store and manage it in the application.</soThat>
+    <tasks>
+- [ ] Implement frontend UI for PDF upload.
+- [ ] Implement `DocumentUploadService` on the frontend to handle file upload to Firebase Storage.
+- [ ] Implement backend API endpoint `POST /api/v1/documents` to create document metadata.
+- [ ] Implement `Storage Service` on the backend to interact with Firebase Storage.
+- [ ] Write unit and integration tests for the upload functionality.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1. Given a logged-in user is on the dashboard, when the user selects a PDF file to upload, then the file should be uploaded to the application and stored securely.
+2. And the user should see the uploaded document in their document list.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>law-ai - Epic Breakdown</title>
+        <section>Story 2.1: PDF Document Upload</section>
+        <snippet>As a user, I want to upload a PDF document, so that I can store and manage it in the application.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Document Upload & Management</title>
+        <section>PDF Upload Flow</section>
+        <snippet>User selects a PDF file on the frontend. Frontend uploads the file directly to Firebase Storage. Upon successful upload, the frontend sends a request to the backend POST /api/v1/documents with the document title and storage path.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>File Storage</section>
+        <snippet>Firebase Storage</snippet>
+      </doc>
+    </docs>
+    <code>
+      <file>
+        <path>frontend/src/app/login/page.tsx</path>
+        <kind>component</kind>
+        <reason>Example of Firebase integration and user authentication.</reason>
+      </file>
+    </code>
+    <dependencies>
+      <frontend>
+        <dependency>firebase: ^12.5.0</dependency>
+        <dependency>next: 16.0.1</dependency>
+        <dependency>react: 19.2.0</dependency>
+      </frontend>
+      <backend>
+        <dependency>fastapi: 0.121.0</dependency>
+        <dependency>firebase-admin: 7.1.0</dependency>
+      </backend>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Users can only access their own documents.</constraint>
+    <constraint>Direct access to Firebase Storage URLs should be restricted.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>POST /api/v1/documents</name>
+      <kind>REST endpoint</kind>
+      <signature>Request: { "title": "...", "storagePath": "..." }, Response (201 Created): { "id": "...", ... }</signature>
+      <path>backend/app/main.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Unit tests will be written for the DocumentUploadService and backend API endpoints. Integration tests will verify the interaction between the frontend, backend, and Firebase Storage. E2E tests will cover the full document upload flow.</standards>
+    <locations>frontend/__tests__, backend/tests</locations>
+    <ideas>
+      <idea for="AC1">Simulate a user selecting a PDF file and verify that it is uploaded to Firebase Storage and a corresponding entry is created in the database.</idea>
+      <idea for="AC2">After a successful upload, verify that the new document appears in the user's document list.</idea>
+    </ideas>
+  </tests>
+</story-context>

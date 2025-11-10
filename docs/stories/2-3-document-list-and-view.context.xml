@@ -1,0 +1,83 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>3</storyId>
+    <title>Document List and View</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/2-3-document-list-and-view.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a user</asA>
+    <iWant>to see a list of my uploaded documents</iWant>
+    <soThat>I can easily find and access them.</soThat>
+    <tasks>
+- [ ] Implement `DocumentListComponent` on the frontend.
+- [ ] Implement `DocumentViewComponent` on the frontend.
+- [ ] Implement backend API endpoint `GET /api/v1/documents` to retrieve the document list.
+- [ ] Implement backend API endpoint `GET /api/v1/documents/{documentId}` to retrieve a single document.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1. Given a logged-in user has uploaded documents, when the user navigates to the document list, then the user should see a list of their documents with titles and upload dates.
+2. And the user can click on a document to view its content.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>law-ai - Epic Breakdown</title>
+        <section>Story 2.3: Document List and View</section>
+        <snippet>As a user, I want to see a list of my uploaded documents, so that I can easily find and access them.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Document Upload & Management</title>
+        <section>Document List and View Flow</section>
+        <snippet>User navigates to the document list page. Frontend sends a request to GET /api/v1/documents. Backend retrieves the list of documents for the user from the database and returns it.</snippet>
+      </doc>
+    </docs>
+    <code></code>
+    <dependencies>
+      <frontend>
+        <dependency>firebase: ^12.5.0</dependency>
+        <dependency>next: 16.0.1</dependency>
+        <dependency>react: 19.2.0</dependency>
+      </frontend>
+      <backend>
+        <dependency>fastapi: 0.121.0</dependency>
+        <dependency>firebase-admin: 7.1.0</dependency>
+      </backend>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>The document list should be paginated.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>GET /api/v1/documents</name>
+      <kind>REST endpoint</kind>
+      <signature>Response (200 OK): [ { "id": "...", "title": "...", "createdAt": "..." }, ... ]</signature>
+      <path>backend/app/main.py</path>
+    </interface>
+    <interface>
+      <name>GET /api/v1/documents/{documentId}</name>
+      <kind>REST endpoint</kind>
+      <signature>Response (200 OK): { "id": "...", "title": "...", "storagePath": "...", ... }</signature>
+      <path>backend/app/main.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>E2E tests will cover the full document list and view flow.</standards>
+    <locations>frontend/__tests__, backend/tests</locations>
+    <ideas>
+      <idea for="AC1">Verify that the document list is displayed correctly with titles and dates.</idea>
+      <idea for="AC2">Verify that clicking on a document displays its content.</idea>
+    </ideas>
+  </tests>
+</story-context>

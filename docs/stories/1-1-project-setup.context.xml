@@ -1,0 +1,128 @@
+<story-context>
+  <metadata>
+    <story-id>1.1</story-id>
+    <story-key>1-1-project-setup</story-key>
+    <story-title>Project Setup</story-title>
+    <epic-id>1</epic-id>
+    <status>ready-for-dev</status>
+    <generated-date>2025-11-06</generated-date>
+    <author>qninhdt</author>
+  </metadata>
+  <user-story>
+    <as-a>developer</as-a>
+    <i-want>to set up the initial project structure</i-want>
+    <so-that>I have a clean and organized codebase to start with.</so-that>
+  </user-story>
+  <acceptance-criteria>
+    <criterion id="1">Given a new project, when the project is initialized, then the project structure should be created with separate directories for backend and frontend.</criterion>
+    <criterion id="2">And a CI/CD pipeline should be configured to run tests and deploy the application.</criterion>
+  </acceptance-criteria>
+  <tasks>
+    <task id="1" ac-ref="1">Initialize Next.js frontend project
+      <subtask>Run `npx create-next-app`</subtask>
+      <subtask>Configure TypeScript, Tailwind CSS, and ESLint</subtask>
+      <subtask>Write a simple test to ensure the app runs</subtask>
+    </task>
+    <task id="2" ac-ref="1">Initialize FastAPI backend project
+      <subtask>Create backend directory</subtask>
+      <subtask>Set up virtual environment</subtask>
+      <subtask>Install FastAPI and other dependencies</subtask>
+      <subtask>Write a simple test to ensure the server starts</subtask>
+    </task>
+    <task id="3" ac-ref="2">Configure CI/CD pipeline
+      <subtask>Create a basic pipeline configuration file (e.g., `.github/workflows/main.yml`)</subtask>
+      <subtask>Add steps for installing dependencies, running tests, and building the projects.</subtask>
+      <subtask>Run the pipeline to ensure it passes</subtask>
+    </task>
+  </tasks>
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>Executive Summary</section>
+        <snippet>An OCR and Document Management application for Vietnamese legal texts. The architecture for `law-ai` is a modern full-stack application with a separate frontend and backend. The frontend is a Next.js application using `shadcn/ui` for components, and the backend is a FastAPI application.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Epic 1: Foundation &amp; User Authentication</section>
+        <snippet>Establish the core project structure, deployment pipeline, and enable user access via Google Authentication.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.1: Project Setup</section>
+        <snippet>As a developer, I want to set up the initial project structure, So that I have a clean and organized codebase to start with. Acceptance Criteria: Given a new project, when the project is initialized, then the project structure should be created with separate directories for backend and frontend. And a CI/CD pipeline should be configured to run tests and deploy the application. Technical Notes: Use FastAPI for the backend and a modern frontend framework like React or Vue. Use a CI/CD service like GitHub Actions.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Executive Summary</section>
+        <snippet>The architecture for `law-ai` is a modern full-stack application with a separate frontend and backend. The frontend is a Next.js application using `shadcn/ui` for components, and the backend is a FastAPI application.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Initialization</section>
+        <snippet>First implementation story should execute: `npx create-next-app@latest my-app --typescript --tailwind --eslint --app`. This establishes the base architecture with these decisions: Language/TypeScript: Yes, Styling solution: Tailwind CSS, Testing framework: None (by default), Linting/Formatting: ESLint, Build tooling: Next.js, Project structure: Standard Next.js App Router structure.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Project Structure</section>
+        <snippet>Describes the directory structure for the `/law-ai` project, including separate `frontend/` and `backend/` directories with their respective subdirectories and configuration files.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; User Authentication</title>
+        <section>Overview</section>
+        <snippet>This epic focuses on establishing the foundational infrastructure for the `law-ai` project. It includes setting up the initial project structure for both the frontend (Next.js) and backend (FastAPI), and implementing user authentication using Firebase Authentication with Google accounts. This initial setup is critical for all subsequent development work.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; User Authentication</title>
+        <section>Objectives and Scope</section>
+        <snippet>In-Scope: Initialize the Next.js frontend project with TypeScript, Tailwind CSS, and ESLint. Initialize the FastAPI backend project. Establish a basic CI/CD pipeline for testing and deployment.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; User Authentication</title>
+        <section>System Architecture Alignment</section>
+        <snippet>This epic directly implements the foundational aspects of the architecture defined in `architecture.md`. It establishes the Next.js frontend and FastAPI backend, as specified. The project structure will follow the layout defined in the architecture document.</snippet>
+      </artifact>
+    </docs>
+    <code>
+    </code>
+    <interfaces>
+    </interfaces>
+    <constraints>
+      <constraint>Frontend technology: Next.js, TypeScript, Tailwind CSS, ESLint.</constraint>
+      <constraint>Backend technology: FastAPI.</constraint>
+      <constraint>Project structure: Separate `frontend/` and `backend/` directories.</constraint>
+      <constraint>CI/CD: Basic pipeline for testing and deployment.</constraint>
+    </constraints>
+    <dependencies>
+      <dependency type="frontend" name="next" version="16.0.1" />
+      <dependency type="frontend" name="react" version="latest" />
+      <dependency type="frontend" name="react-dom" version="latest" />
+      <dependency type="frontend" name="tailwindcss" version="latest" />
+      <dependency type="backend" name="fastapi" version="0.121.0" />
+      <dependency type="backend" name="uvicorn" version="latest" />
+      <dependency type="backend" name="pydantic" version="2.12.4" />
+      <dependency type="backend" name="python-dotenv" version="latest" />
+    </dependencies>
+  </artifacts>
+  <tests>
+      <standards>Unit tests for individual components, integration tests for interactions between components, and E2E tests for full user flows.</standards>
+      <locations>
+        <location type="frontend">frontend/__tests__</location>
+        <location type="backend">backend/tests</location>
+      </locations>
+      <ideas>
+        <idea>Verify frontend project initializes correctly.</idea>
+        <idea>Verify backend project initializes correctly.</idea>
+        <idea>Verify CI/CD pipeline runs successfully.</idea>
+      </ideas>
+    </tests>
+</story-context>

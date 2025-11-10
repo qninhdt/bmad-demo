@@ -1,0 +1,78 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2</storyId>
+    <title>Mobile Document Capture</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-06</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/stories/2-2-mobile-document-capture.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a user</asA>
+    <iWant>to capture document pages using my mobile device</iWant>
+    <soThat>I can easily digitize physical documents.</soThat>
+    <tasks>
+- [ ] Implement mobile UI for document capture.
+- [ ] Integrate with device camera.
+- [ ] Implement image processing to create a single document.
+- [ ] Upload the assembled document to Firebase Storage.
+- [ ] Create backend endpoint to handle the mobile capture flow.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1. Given a logged-in user is on the mobile application, when the user opens the capture mode, then the user should be able to capture multiple pages consecutively.
+2. And the captured pages should be uploaded and assembled into a single document.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>law-ai - Epic Breakdown</title>
+        <section>Story 2.2: Mobile Document Capture</section>
+        <snippet>As a user, I want to capture document pages using my mobile device, so that I can easily digitize physical documents.</snippet>
+      </doc>
+      <doc>
+        <path>docs/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Document Upload & Management</title>
+        <section>Mobile Capture Flow</section>
+        <snippet>User captures document pages using the mobile app. Mobile app uploads the images to Firebase Storage. Mobile app sends a request to the backend to a (to be defined) endpoint to process the images into a single document.</snippet>
+      </doc>
+    </docs>
+    <code></code>
+    <dependencies>
+      <frontend>
+        <dependency>firebase: ^12.5.0</dependency>
+        <dependency>next: 16.0.1</dependency>
+        <dependency>react: 19.2.0</dependency>
+      </frontend>
+      <backend>
+        <dependency>fastapi: 0.121.0</dependency>
+        <dependency>firebase-admin: 7.1.0</dependency>
+      </backend>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Users can only access their own documents.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>POST /api/v1/documents/mobile-capture</name>
+      <kind>REST endpoint</kind>
+      <signature>Request: { "image_paths": [...] }, Response (201 Created): { "id": "...", ... }</signature>
+      <path>backend/app/main.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>E2E tests will cover the full mobile capture flow.</standards>
+    <locations>frontend/__tests__, backend/tests</locations>
+    <ideas>
+      <idea for="AC1">Simulate a user capturing multiple pages and verify that the images are uploaded.</idea>
+      <idea for="AC2">Verify that the uploaded images are assembled into a single document and a corresponding entry is created in the database.</idea>
+    </ideas>
+  </tests>
+</story-context>

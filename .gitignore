@@ -1,0 +1,4 @@
+*.cast
+.gemini
+.pytest_cache
+__pycache__

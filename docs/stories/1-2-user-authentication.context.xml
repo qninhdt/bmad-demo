@@ -1,0 +1,99 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>2</storyId>
+    <title>User Authentication</title>
+    <status>to-do</status>
+    <generatedAt>2025-11-06</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>/home/qninh/projects/law-ai/docs/stories/1-2-user-authentication.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>user</asA>
+    <iWant>to log in to the application using my Google account</iWant>
+    <soThat>I can securely access my documents.</soThat>
+    <tasks>
+- [ ] Implement "Login with Google" button on the frontend
+- [ ] Set up Firebase Authentication for Google login
+- [ ] Create a callback page to handle the authentication response
+- [ ] Secure the backend API to require authentication
+- [ ] Write tests for the authentication flow
+</tasks>
+  </story>
+
+  <acceptanceCriteria>
+**Given** a user is on the login page,
+**When** the user clicks the "Login with Google" button,
+**Then** the user should be redirected to the Google authentication page.
+**And** after successful authentication, the user should be redirected back to the application and logged in.
+</acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>Functional Requirements</section>
+        <snippet>Users will authenticate using their Google account via Firebase Authentication.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/architecture.md</path>
+        <title>Architecture</title>
+        <section>Epic to Architecture Mapping</section>
+        <snippet>Epic 1: Foundation & User Authentication: Frontend: Next.js project setup, Firebase SDK integration for authentication. Backend: FastAPI for user management (if needed beyond Firebase Auth), Firebase Admin SDK.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.2: User Authentication</section>
+        <snippet>As a user, I want to log in to the application using my Google account, So that I can securely access my documents. Technical Notes: Use Firebase Authentication for Google login.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation & User Authentication</title>
+        <section>Detailed Design</section>
+        <snippet>Frontend: `AuthService`: A module to handle Firebase authentication, including login and logout functions. `ApiClient`: A module to make authenticated requests to the backend API. Backend: `Auth Middleware`: Middleware to protect backend endpoints and validate Firebase JWTs.</snippet>
+      </artifact>
+    </docs>
+    <code></code>
+    <dependencies>
+      <dependency type="frontend" name="react" version="19.2.0" />
+      <dependency type="frontend" name="next" version="16.0.1" />
+      <dependency type="frontend" name="firebase" version="latest" />
+      <dependency type="backend" name="fastapi" version="0.121.0" />
+      <dependency type="backend" name="uvicorn" version="latest" />
+      <dependency type="backend" name="pydantic" version="2.12.4" />
+      <dependency type="backend" name="python-dotenv" version="latest" />
+      <dependency type="backend" name="firebase-admin" version="7.1.0" />
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+      <constraint>Integrate Firebase Authentication for Google-based login on the frontend.</constraint>
+      <constraint>Secure backend endpoints to require authentication.</constraint>
+      <constraint>Frontend: `AuthService`: A module to handle Firebase authentication, including login and logout functions.</constraint>
+      <constraint>Backend: `Auth Middleware`: Middleware to protect backend endpoints and validate Firebase JWTs.</constraint>
+    </constraints>
+  <interfaces>
+      <interface>
+        <name>Get User Profile</name>
+        <kind>REST endpoint</kind>
+        <signature>GET /api/v1/user/me</signature>
+        <path>backend/app/api/v1/user.py</path>
+      </interface>
+    </interfaces>
+  <tests>
+    <standards>Unit tests for the `AuthService` on the frontend and the `Auth Middleware` on the backend. Integration tests to verify the interaction between the frontend and backend authentication flow. End-to-end tests to simulate the full user login flow.</standards>
+    <locations>
+        <location type="frontend">frontend/__tests__</location>
+        <location type="backend">backend/tests</location>
+      </locations>
+    <ideas>
+        <idea>E2E test for Google login flow.</idea>
+        <idea>E2E test for login and authenticated API request.</idea>
+        <idea>Unit test for the frontend AuthService.</idea>
+        <idea>Unit test for the backend Auth Middleware.</idea>
+      </ideas>
+  </tests>
+</story-context>
